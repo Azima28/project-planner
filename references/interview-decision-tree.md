@@ -9,8 +9,11 @@ When the user gives their initial project description:
 2. **State assumptions**: "I'm assuming X and Y. Correct?"
 3. **Identify the domain**: Detect the domain signal (e.g., education, commerce, operations) and read `references/domain-knowledge.md` for probing amplifiers.
 4. **Ask about gaps contextually**: Do not ask generic questions. Ask specific follow-ups based on the domain and the user's description.
+5. **Record evidence**: Every user answer must be recorded as an evidence node (`E-xxx`). Explicit statements are `confirmed`; ambiguous or partial answers are `assumed` with a follow-up question.
 
 *Example: If the user says "exam app", don't ask "What is the closest work type?" Instead ask "Are the exams for one school or multiple? Is it just multiple choice or essays too?"*
+
+If the user says "just proceed," only proceed in reversible areas. For irreversible decisions (payment, data, production), push back and explain the risk.
 
 ## Phase 2: Stakeholder & Scope Mapping
 
@@ -19,6 +22,8 @@ Before discussing screens and features, map the landscape:
 2. **Vision vs MVP**: What is the ultimate dream for this project? What is the Minimum Viable Product (v1) that makes it useful today?
 3. **Phasing**: What must be in v1? What can definitely wait for v2?
 4. **Success Criteria**: How will the user measure if this project is successful?
+
+Record each answer as evidence. Ambiguous = `assumed`, explicit = `confirmed`.
 
 ## Phase 3: Role-by-Role Deep Dive
 
@@ -32,11 +37,21 @@ For each role identified in the scope, run a contextual exploration to discover 
    - **Communication & notification**: How does this role communicate with others?
    - **Configuration & settings**: What can this role customize?
    - **Edge cases & recovery**: What goes wrong and who fixes it?
-   - **Competitor features**: What do similar apps offer? (Research 2-3 reference apps).
+   - **Competitor features**: What do similar apps offer? Use web search to find 2-3 competitor/reference apps. Present a brief feature comparison and ask the user which competitor features they want.
 3. **Surface/Channel Decision**: After understanding the tasks, choose the right surface (native app, web, POS, kiosk, physical procedure). Do not assume everything is a screen.
 4. **Between-Role Handoffs**: Where does one role's output become another's input?
+5. **Capability feedback**: If a discovered feature triggers a capability from `references/capability-catalog.md` (e.g., "parent portal" → `sensitive_data`), record it immediately. Do not wait until Step 3 of the main workflow.
 
 *Present the discovered features per role grouped clearly, with options to Include, Defer, or Skip.*
+
+Record each included/deferred feature as a requirement node (`REQ-xxx`) with acceptance criteria.
+
+### Handling user resistance to deep dive
+
+If the user says "enough, just build" during Phase 3:
+- Record all remaining unprobed roles/dimensions as `deferred_discovery`.
+- Note the risk: "Features for [Role X] were not explored — may require change requests later."
+- Proceed with what is known. Do NOT silently fill gaps with assumptions.
 
 ## Phase 4: Synthesis & Scope Lock
 
@@ -48,10 +63,40 @@ Before proceeding to modeling and creating artifacts:
 
 ## Batching and Stop Condition
 
-- Group questions logically. Do not overwhelm the user with 10+ questions at once.
-- The initial batch is limited to approximately 5 top-level conceptual questions.
-- If the user answers ambiguously, ask specific follow-ups. Do not assume.
+- Group questions that decide one thing; high-risk gates get separate receipts.
+- The initial batch is limited to **approximately 5 top-level questions** per response. This is not an absolute number — 3 complex questions can be heavier than 6 yes/no questions. The principle: do not overwhelm the user.
+- If the user answers ambiguously or partially, **do not fill missing answers with assumptions**. Ask specific follow-ups.
+- After each batch, paraphrase facts, assumptions, impact, and blockers for user correction.
 - The interview loop stops when Phase 4 is confirmed by the user.
+- Re-run routing when mode, archetype, capability, budget, owner, data, partner, or scope changes materially.
+
+### Good batch example
+
+> 1. Who is the primary target user? (buyers only, or buyers + sellers?)
+> 2. Working alone or with a team? If a team, how many people?
+> 3. Do you already have brand identity (logo, colors, name)?
+> 4. Business model: commission, subscription, or something else?
+> 5. When is the target for the first release?
+
+This is good: each question decides one thing, the user can answer quickly, and there are no hidden sub-questions.
+
+### Bad batch example
+
+> Some questions to determine the project direction:
+>
+> 1. Target users? Platform? Budget? Timeline? Team size? Skills?
+> 2. Features: search? filter? payment? chat? reviews? wishlist? notifications?
+> 3. Preferences: SQL/NoSQL? REST/GraphQL? Monolith/micro? CI/CD? Testing?
+
+This is bad: 13+ sub-questions dumped at once. The user will answer partially, and the agent will fill the rest with assumptions.
+
+### Handling ambiguous answers
+
+**User**: "team" (without a number)
+
+**DO NOT**: Assume "solo dev" and mark as `confirmed`.
+
+**DO**: "How many people on the team? This affects architecture — 1-2 people take a different approach than 5+."
 
 ## Proportional Scaling
 

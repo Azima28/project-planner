@@ -20,6 +20,8 @@ For every artifact candidate, create an `artifact` node with `include` or `skip`
 | Physical/event/operations | procedure, safety/contingency, staffing/ownership, field acceptance |
 | Pilot/production | release gate, monitoring, incident/rollback, support handoff |
 | Material change | change-impact map and regenerated-file list |
+| Feature expansion completed (Phase 3-4) | feature map per role with MoSCoW priorities |
+| Deferred discovery exists | deferred discovery register (unprobed roles/dimensions and associated risks) |
 
 For visual design, evaluate `visual_design_spec` only if needed. During planning, its content is **direction and constraints** (brand character, color mood, typography style, accessibility, anti-requirements, reference apps) — not hex codes, dp values, or ASCII wireframes. Implementation details (design tokens, component styling, mockups) are the coding agent's job. See `references/delivery-surface-design.md` §"Visual design spec boundary in planning". Every local image/asset referenced in Markdown must exist and be modeled as its own artifact or clearly covered by its parent artifact, and must exist when validated.
 

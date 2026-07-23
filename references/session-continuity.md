@@ -49,15 +49,20 @@ When continuing an existing project, follow this order:
 - How many `include` artifacts already have files?
 - How many evidence items are still `unverified`?
 - Are there P0 issues in the last report?
-- Which interview questions have been answered, which have not?
+- **Interview phase progress** (see `references/interview-decision-tree.md`):
+  - Phase 1 (Understand & Reflect): completed or not?
+  - Phase 2 (Stakeholder & Scope): MVP/phasing discussed?
+  - Phase 3 (Role Deep Dive): which roles have been probed, which have not? Which of the 7 dimensions were covered per role?
+  - Phase 4 (Synthesis): was scope locked by user?
+- Are there `deferred_discovery` items from a previous session where the user cut the interview short?
 
 ### 3. Report to user
-Before doing anything, communicate the status:
+Before doing anything, communicate the status including interview progress:
 
-> "From the previous session: 11 decisions (9 confirmed, 2 assumed), 5/8 deliverables have files, 3 P1 open. Not yet completed: [list]. Where would you like to continue?"
+> "From the previous session: 11 decisions (9 confirmed, 2 assumed), 5/8 deliverables have files, 3 P1 open. Interview progress: Phase 1-2 complete. Phase 3 deep dive done for Student and Teacher roles; Admin and Super Admin roles not yet explored. Phase 4 scope lock not yet confirmed. Where would you like to continue?"
 
 ### 4. Do not repeat answered interviews
-If the conversation log shows the user already answered a question, DO NOT ask it again. Record as evidence from the conversation log.
+If the conversation log shows the user already answered a question, DO NOT ask it again. Record as evidence from the conversation log. Resume from the exact phase/role/dimension where the previous session stopped.
 
 ### 5. Do not change old decisions without reason
 If the previous session decided on React Native framework, do not suddenly suggest Flutter without a change request.
