@@ -705,16 +705,21 @@ def validate(model: dict[str, Any], model_path: Path, schema_path: Path) -> dict
         project.get("operating_mode") == "production" and not p0_issues and not p1_issues and not critical_open
         and all(tree["status"] in {"pass", "ready_no_change", "not_applicable"} for tree in tree_coverage.values())
     )
+    eligibility = {
+        "prototype_mock": "allowed" if not p0_issues else "not_ready",
+        "pilot": "allowed" if not p0_issues and not critical_open else "not_ready",
+        "production": "allowed" if production_allowed else "not_ready",
+    }
+    mode = project.get("operating_mode")
+    if isinstance(mode, str) and mode in eligibility and eligibility[mode] == "not_ready":
+        issue(report, "P1", "MODE_EXCEEDS_ELIGIBILITY", f"Project declares {mode} mode, but is not ready for it. See planner execution report for blocking factors.")
+
     report["planner_execution"] = {
         "status_counts": dict(sorted(status_counts.items())),
         "critical_open_nodes": sorted(critical_open),
-        "operating_mode": project.get("operating_mode"),
+        "operating_mode": mode,
         "archetype": project.get("archetype"),
-        "eligibility": {
-            "prototype_mock": "allowed" if not p0_issues else "not_ready",
-            "pilot": "allowed" if not p0_issues and not critical_open else "not_ready",
-            "production": "allowed" if production_allowed else "not_ready",
-        },
+        "eligibility": eligibility,
     }
     report["synchronization"] = {
         "planned_but_missing": sorted(

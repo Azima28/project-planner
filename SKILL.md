@@ -222,6 +222,6 @@ If the user changes direction or output is out of alignment with the plan, freez
 - [ ] Implementation gate is met before coding begins (0 P0, complete gate receipts, user explicitly requests build).
 - [ ] Implementation-artifact generation has been referenced if user proceeds to build phase.
 
-Before responding to the user with a final status, read the checklist above one by one. If any item is unmet, report it as a gap — do not report as "complete."
+Before responding to the user with a final status, read the checklist above one by one. If any item is unmet, report it as a gap — do not report as "complete." Note: The Final Check (above) covers validation and compliance gates. You must also read `references/fullstack-checklist.md` which covers planning completeness. Both must be satisfied.
 
 For real-world examples of how these rules apply, read `references/example-cases.md`.

@@ -175,7 +175,8 @@ Different project, different depth. An admin dashboard does not need brand chara
 > Let's define scope:
 > 1. For v1 (MVP), what's the MINIMUM that makes this useful? Just students taking exams + teachers grading? Or do you need admin features from day one?
 > 2. What's the full vision you want eventually? Multi-school? Face recognition? AI proctoring? Analytics?
-> 3. What can definitely wait for v2?"
+> 3. What can definitely wait for v2?
+> 4. For the UI, do you have mockups/brand guidelines, or should I generate the design direction?"
 
 **Phase 3 — Role Deep Dive (Student):**
 

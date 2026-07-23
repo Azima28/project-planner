@@ -40,6 +40,8 @@ Evidence has a kind, scope, retrieval time, confidence, sensitivity, and an opti
 
 **`evidences` vs `evidence_ids`**: Use `evidence_ids` on a node when the evidence directly supports that node's claim. Use the `evidences` edge when you need the evidence relationship to appear in graph traversals and tree coverage reports. Both mechanisms are valid; `evidence_ids` is simpler for most cases. Use `evidences` edges when audit traceability in the graph is critical (e.g., production gates, waivers).
 
+**`verified_by` contract**: This edge can only target `delivery_nodes` (e.g., a node with category `test`, `metric`, or `runbook`). If a requirement is verified by research, or a risk by a decision, you must create a delivery node to represent the verifiable output (e.g., the research report or the decision document artifact representation if needed, though typically category `test` or `procedure`).
+
 The graph produces Instruction, Decision, Requirement, Delivery, Integration, Risk, and Change-impact trees. An empty tree may only be `not_applicable` if the archetype/capability does not trigger that tree and there is a rationale on the artifact manifest.
 
 ## Work item and requirement contract
