@@ -271,6 +271,8 @@ def validate(model: dict[str, Any], model_path: Path, schema_path: Path) -> dict
                 issue(report, "P0", "BLOCKED_WITHOUT_ACTION", f"Blocked node '{node_id}' needs next_action.", node_id)
             if lifecycle == "deferred" and not node.get("target_release"):
                 issue(report, "P1", "DEFERRED_WITHOUT_TARGET", f"Deferred node '{node_id}' needs target_release.", node_id)
+            if lifecycle == "deferred_discovery" and not node.get("next_action"):
+                issue(report, "P1", "DEFERRED_DISCOVERY_WITHOUT_ACTION", f"Deferred-discovery node '{node_id}' needs next_action describing what remains unprobed.", node_id)
             if lifecycle == "superseded" and not node.get("superseded_by"):
                 issue(report, "P1", "SUPERSEDED_WITHOUT_TARGET", f"Superseded node '{node_id}' needs superseded_by.", node_id)
 

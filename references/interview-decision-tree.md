@@ -22,7 +22,7 @@ Before discussing screens and features, map the landscape:
 2. **Vision vs MVP**: What is the ultimate dream for this project? What is the Minimum Viable Product (v1) that makes it useful today?
 3. **Phasing**: What must be in v1? What can definitely wait for v2?
 4. **Success Criteria**: How will the user measure if this project is successful?
-5. **Design & Assets**: Explicitly ask who is providing the design. Does the user already have mockups/brand guidelines, or should the AI generate the design direction?
+5. **Design & Assets**: Explicitly ask who is providing the design. Does the user already have mockups/brand guidelines, or should the AI generate the design direction? Record the answer as evidence — it drives `references/delivery-surface-design.md` §"Visual design spec boundary in planning" later.
 
 Record each answer as evidence. Ambiguous = `assumed`, explicit = `confirmed`.
 
@@ -42,6 +42,7 @@ For each role identified in the scope, run a contextual exploration to discover 
 3. **Surface/Channel Decision**: After understanding the tasks, choose the right surface (native app, web, POS, kiosk, physical procedure). Do not assume everything is a screen.
 4. **Between-Role Handoffs**: Where does one role's output become another's input?
 5. **Capability feedback**: If a discovered feature triggers a capability from `references/capability-catalog.md` (e.g., "parent portal" → `sensitive_data`), record it immediately. Do not wait until Step 3 of the main workflow.
+6. **De-duplication**: If a feature was already discovered from a capability trigger's "Feature expansion trigger" column, do not count it again during 7-dimension probing. Merge, do not duplicate.
 
 *Present the discovered features per role grouped clearly, with options to Include, Defer, or Skip.*
 

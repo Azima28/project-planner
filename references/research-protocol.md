@@ -63,4 +63,4 @@ This is good: ref points to an actual conversation, scope quotes the actual answ
   "confidence": "confirmed"
 }
 ```
-This is bad: the `security` conversation never happened (fabricated ref), the user never explicitly discussed security (this is agent inference), but it is marked `confirmed`. Should be `kind: agent_inference`, `confidence: assumed`.
+This is bad: the `security` conversation never happened (fabricated ref), the user never explicitly discussed security (this is planner inference), but it is marked `confirmed`. Should be `kind: internal_record`, `confidence: assumed`, with a `ref` pointing to the actual reasoning or conversation turn where the planner inferred it.

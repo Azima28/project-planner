@@ -24,7 +24,7 @@ The examples below show how the skill rules work in real situations. These are n
 
 **User**: "Enough planning, let's just code."
 
-**What to do (step 6b):**
+**What to do (step 7 — implementation gate):**
 
 > "Of 8 deliverables, 5 have files and 3 are still draft (API contract, role matrix, access policy). There is 1 research item still unverified (R-003: backend language). Do you want to complete these 3 gaps first, or continue building with them noted as open?"
 
