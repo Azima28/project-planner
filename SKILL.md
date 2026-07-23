@@ -88,7 +88,7 @@ Before modeling:
 a) Present a complete feature map organized by role with MoSCoW priority.
 b) Proactively suggest features the user didn't mention but are common in the detected domain.
 c) Ask the user to confirm scope: "Is this complete for v1?"
-d) Create `REQ-xxx` nodes for all features (include, deferred, out_of_scope). Deferred features get `target_release` conditions.
+d) Create `REQ-xxx` nodes for all features (include, deferred, out_of_scope). Map MoSCoW to `criticality` (Must=`critical`, Should=`high`, Could=`medium`, Won't=`low`). Deferred features get `target_release` conditions.
 
 ### 3. Research and critical gates
 

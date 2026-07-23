@@ -17,7 +17,7 @@ Do not mix status meanings.
 
 | Dimension | Values | Question answered |
 |---|---|---|
-| `lifecycle` | `draft`, `active`, `validated`, `deferred`, `out_of_scope`, `superseded`, `complete`, `draft_invalid` | Is the node being worked on? |
+| `lifecycle` | `draft`, `active`, `validated`, `deferred`, `deferred_discovery`, `out_of_scope`, `superseded`, `complete`, `draft_invalid` | Is the node being worked on? |
 | `confidence` | `confirmed`, `assumed`, `unverified`, `blocked`, `conflicting`, `research_incomplete` | How trustworthy is the claim? |
 | `operating_mode` (project) | `prototype_mock`, `sandbox`, `pilot`, `production` | What claims/operations are allowed? |
 
@@ -39,7 +39,9 @@ Evidence has a kind, scope, retrieval time, confidence, sensitivity, and an opti
 
 The graph produces Instruction, Decision, Requirement, Delivery, Integration, Risk, and Change-impact trees. An empty tree may only be `not_applicable` if the archetype/capability does not trigger that tree and there is a rationale on the artifact manifest.
 
-## Work item contract
+## Work item and requirement contract
+
+Requirements (`REQ-xxx`) must map MoSCoW priorities to `criticality`: Must = `critical`, Should = `high`, Could = `medium`, Won't = `low`.
 
 Every active work item has acceptance criteria and an edge from a requirement or decision. Delivery needs are determined by profile:
 

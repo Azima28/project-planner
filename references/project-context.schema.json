@@ -33,7 +33,7 @@
   ],
   "$defs": {
     "id": {"type": "string", "pattern": "^[A-Z][A-Z0-9]*-[A-Z0-9][A-Z0-9-]{0,62}$"},
-    "lifecycle": {"enum": ["draft", "active", "validated", "deferred", "out_of_scope", "superseded", "complete", "draft_invalid"]},
+    "lifecycle": {"enum": ["draft", "active", "validated", "deferred", "deferred_discovery", "out_of_scope", "superseded", "complete", "draft_invalid"]},
     "confidence": {"enum": ["confirmed", "assumed", "unverified", "blocked", "conflicting", "research_incomplete"]},
     "criticality": {"enum": ["low", "medium", "high", "critical"]},
     "node": {

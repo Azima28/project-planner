@@ -59,7 +59,7 @@ Before proceeding to modeling and creating artifacts:
 1. **Present a Complete Feature Map**: Organize all discovered features by role with priority tags (Must/Should/Could/Won't - MoSCoW).
 2. **Proactively Suggest**: Offer features the user didn't mention but are common in this domain based on your probing.
 3. **Scope Lock**: Ask the user to confirm: "Is this scope complete for v1?"
-4. **Record**: Create `REQ-xxx` nodes for all included and deferred features. Deferred features must have a `target_release` condition.
+4. **Record**: Create `REQ-xxx` nodes for all included and deferred features. Map MoSCoW priorities to the `criticality` field (Must = `critical`, Should = `high`, Could = `medium`, Won't = `low`). Deferred features must have a `target_release` condition.
 
 ## Batching and Stop Condition
 
