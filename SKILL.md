@@ -61,9 +61,11 @@ For medium-to-large projects, follow the full workflow below.
 - Create an Instruction Registry with acceptance criteria.
 - Choose the initial archetype and the lowest safe mode. If unclear, store as `assumed` or `blocked`, not production.
 
-### 2. Discover: Understand, reflect, and branch
+### 2. Discovery & Interview (Phases 1-4)
 
 Read `references/interview-decision-tree.md`. The interview is a dynamic conversation, not a questionnaire. The planner:
+
+**Phase 1 & 2: Understand, reflect, and branch**
 
 a) **Listens and reflects**: Summarize what the user said, state assumptions, and identify gaps. Ask only about what's missing — don't re-ask what was already said.
 b) **Identifies domain and branches**: Detect the domain signal from the user's description. Read `references/domain-knowledge.md` for probing amplifiers. Generate contextual follow-up questions specific to this domain and project — not generic questions from a list.
@@ -71,7 +73,7 @@ c) **Maps stakeholders and scope**: Identify all affected parties (not just app 
 
 Read `references/scale-detection-guide.md` to determine proportional depth.
 
-### 2b. Deep dive: Role-by-role feature expansion
+**Phase 3: Deep dive (Role-by-role feature expansion)**
 
 For each role identified, run a contextual exploration:
 a) Walk through the role's journey/session from start to finish.
@@ -82,7 +84,7 @@ e) Map handoffs between roles (one role's output → another role's input).
 
 For user-facing work, read `references/delivery-surface-design.md` for channel decisions. Break requirements into capabilities per `references/capability-catalog.md`.
 
-### 2c. Synthesis and scope lock
+**Phase 4: Synthesis and scope lock**
 
 Before modeling:
 a) Present a complete feature map organized by role with MoSCoW priority.
@@ -127,7 +129,7 @@ Always deliver three auditable reports without chain-of-thought: execution/compl
 
 Read `references/fullstack-checklist.md` to ensure no dimension is missed before declaring planning complete.
 
-### 6b. Implementation gate
+### 7. Implementation gate
 
 Do not start implementation (writing code, scaffolding project, generating DB schema) until the following conditions are met:
 
@@ -140,7 +142,7 @@ If the user requests a build while planning is incomplete, communicate the remai
 
 For coding agent handoff, read `references/prompt-engineering-guide.md`. For generating DB schema, API, and scaffold from the model, read `references/implementation-artifact-generation.md`.
 
-### 7. Changes and reconciliation
+### 8. Changes and reconciliation
 
 If the user changes direction or output is out of alignment with the plan, freeze old files as `draft_invalid`; create a change request with `impacts` edges; update the model; regenerate all affected artifacts; re-validate. Do not locally patch one file while leaving the graph incorrect.
 
