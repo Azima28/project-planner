@@ -214,6 +214,7 @@ If the user changes direction or output is out of alignment with the plan, freez
 - [ ] Graph and actual artifacts pass two-way validation.
 - [ ] P0/P1, blockers, skips, fallbacks, and eligibility are reported honestly.
 - [ ] Every decision node has an event in `decisions.jsonl`; every research has an event in `research-ledger.jsonl`.
+- [ ] Conversation log (`conversation-log.jsonl`) has been written for this session's key interactions before ending.
 - [ ] No claims of "planning done/100%/complete" while `include` artifacts without files or `unverified` research affecting active decisions still exist.
 - [ ] Visual design spec contains only direction and constraints, not hex codes, dp values, or ASCII wireframes.
 - [ ] A relevant forward test scenario has been selected and the model passes.

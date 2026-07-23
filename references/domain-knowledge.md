@@ -2,6 +2,8 @@
 
 This is a list of trigger questions and probing amplifiers. Do not use this as a static provider facts, pricing, design, or technology recommendation list. Research up-to-date sources every time an answer affects a decision.
 
+When a domain probe activates a capability (third column below), also read `references/capability-catalog.md` for the corresponding feature expansion triggers and policy requirements.
+
 | Domain signal | Probe | Potentially active capability |
 |---|---|---|
 | Commerce/booking | Can items/seats run out or be booked simultaneously? | `limited_inventory`, `money_movement` |

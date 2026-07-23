@@ -119,7 +119,14 @@ def migrate(old: dict[str, Any], source_ref: str) -> dict[str, Any]:
                 node["key"] = old_node.get("name", old_node["id"]).lower().replace(" ", "_")
                 node["policy_ids"] = [node["key"] if node["key"] else "custom"]
                 if node["policy_ids"] == ["custom"]:
-                    node["custom_policy"] = {"note": "Define gates, artifacts, tests, owner, and release condition."}
+                    node["custom_policy"] = {
+                        "trigger": "Imported from v1 — review and define actual trigger.",
+                        "required_artifact_types": [],
+                        "required_delivery_categories": [],
+                        "gate_description": "Review imported capability and define gates, artifacts, and tests.",
+                        "owner": "to_be_confirmed",
+                        "release_condition": "Define after v2 reconciliation.",
+                    }
             elif group == "requirements":
                 node["title"] = old_node.get("title", old_node["id"])
                 node["requirement_type"] = old_node.get("requirement_type", "functional")
@@ -144,6 +151,24 @@ def migrate(old: dict[str, Any], source_ref: str) -> dict[str, Any]:
                 node["next_action"] = old_node.get("next_action", "Resolve or explicitly defer.")
             output[group].append(node)
             internal_ids.add(node["id"])
+
+    # Ensure CAP-MIGRATION-001 exists if any integration references it.
+    if "CAP-MIGRATION-001" not in internal_ids and any(
+        isinstance(n, dict) and n.get("capability_id") == "CAP-MIGRATION-001"
+        for n in output["integrations"]
+    ):
+        output["capabilities"].append({
+            "id": "CAP-MIGRATION-001", "key": "imported_integration",
+            "policy_ids": ["custom"],
+            "custom_policy": {
+                "trigger": "Imported integration without a v1 capability — review and assign correct policy.",
+                "required_artifact_types": [], "required_delivery_categories": [],
+                "gate_description": "Determine actual capability and gates during reconciliation.",
+                "owner": "to_be_confirmed", "release_condition": "Define after v2 reconciliation.",
+            },
+            "lifecycle": "active", "confidence": "unverified",
+        })
+        internal_ids.add("CAP-MIGRATION-001")
 
     existing_delivery = {node["id"] for node in output["delivery_nodes"]}
     for old_feature in feature_list:
