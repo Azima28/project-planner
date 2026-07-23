@@ -30,6 +30,7 @@ Produce traceable outputs from user instructions to evidence, decisions, work, a
 12. Report status honestly. Do not claim planning is "done", "100%", or "complete" if there are still `include` artifacts without files, `unverified` research affecting active decisions, or gates without receipts. Instead, say: "5 of 8 deliverables have files, 3 are still draft: X, Y, Z." The user deserves to know the actual state to make informed decisions. The word "complete" may only be used when the validation report supports it.
 13. Use professional language appropriate to audience and context. For business, technical, and financial decisions — avoid excessive decorative emoji and slang that undermines seriousness. Emoji may be used minimally for status indicators in tables (e.g., status columns). Adjust formality to the user: if the user is very casual, you may be slightly more relaxed — but critical decisions like "payment gateway choice" should never be delivered with excessive casualness. Important decisions deserve serious delivery.
 14. Read the relevant reference BEFORE taking action at each step. Do not create models, write artifacts, or decide architecture before reading the references mentioned in that step. This is non-negotiable — references contain rules that cannot be internalized from SKILL.md alone. For long sessions, prioritize reading references relevant to the current step only. You do not need to re-read all 23 references in every session — use the reference routing table below to identify which files matter for each step.
+15. Every file generated in `deliverables/` or `reports/` MUST be registered as an `artifact` node in `project-context.json`. Do not create Markdown/JSON files on disk without an `artifact` node (causes `OUTPUT_WITHOUT_ARTIFACT_NODE`). When defining custom policies, set `policy_ids: ["custom"]` and supply `custom_policy` (do not invent string policy IDs like `online_exam_policy`). Ensure all requirement, work item, capability, and risk nodes have typed edges — orphan nodes and disconnected trees cause P0/P1 validation failures.
 
 ## Project workspace
 
@@ -174,6 +175,7 @@ If the user changes direction or output is out of alignment with the plan, freez
 |---|---|
 | Model, evidence, graph, status | `references/project-model.md` |
 | Schema and v2 template | `references/project-context.schema.json`, `references/project-context.template.json` |
+| Event log format (decisions/research/change-requests/conversation) | `references/event-log-format.md` |
 | Artifact selection | `references/artifact-manifest.md` |
 | Deliverable templates + metadata envelope | `references/deliverable-templates.md` |
 | Technology when requested | `references/technology-selection.md` |

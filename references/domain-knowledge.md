@@ -23,11 +23,31 @@ When a domain signal is detected from the user's initial description, use these 
 - **Lifecycle**: Academic year → semester → exam period → grading → report card → next year. Where does this app fit in that cycle?
 - **Content**: How are questions created? Bank shared across teachers? Versioned across years? Difficulty tagging? Topic categorization?
 - **Assessment types**: Only multiple choice? Essay? Oral? Project-based? Mixed? Each type has different grading, timing, and review needs.
+  - **PG (Multiple choice/pilihan ganda)**: Single correct answer, auto-graded.
+  - **Multi-select**: One or more correct answers — partial credit policy? (all-or-nothing vs proportional per correct option).
+  - **Essay**: Manual grading needed. Rubric support? Word/character limits?
+  - **Scoring logic configurable**: Per-soal vs per-ujian, passing grade, weight per question.
+- **Exam vs Practice mode (Ujian vs Latihan)**:
+  - Exam: strict timer, no pause, anti-cheat active, score visibility configurable (admin decides show/hide), one attempt only.
+  - Practice: relaxed rules, can retry, immediate score + explanation, anti-cheat optional/off.
+  - How do these modes relate? Separate or combined in the same screen?
 - **Grading**: Auto-grade vs manual. Rubric system? Grade curves? Weighted sections? Minimum passing score?
-- **Analytics**: Per-student trends? Per-topic weakness? Class comparison? School-wide statistics? Parent-visible reports?
-- **Integrity**: Proctoring? Lockdown? Randomization? Time limits? IP/device restrictions? Plagiarism detection?
+- **Analytics**: Per-student trends? Per-topic weakness? Class comparison? School-wide statistics? Parent-visible reports? Export (Excel/PDF)?
+- **Integrity / Anti-cheat**:
+  - Detection methods: Page Visibility API (tab switch), window blur event, copy/paste/right-click disable, screenshot heuristics, concurrent login prevention.
+  - Penalty system (configurable per exam): **Off** (warning only), **Fixed** (same duration per violation), **Progressive** (escalating duration per violation tier), **Max violations cap** (X strikes → auto anulir).
+  - Timer behaviour: always runs during penalty (no pause).
+  - Violation logging: timestamp, type, detail, auto/anulir flag. Visible to admin in real-time monitor.
+  - Override: admin can manually anulir or clear violation record.
+- **Role hierarchy pattern** (common for exam platforms):
+  - **Student**: responsive web/mobile, can take exams, view results (if permitted).
+  - **Teacher**: web desktop, manages question bank, sets up exam drafts, grades essays, views analytics.
+  - **Admin**: web desktop, deploys exams (publishes teacher drafts), real-time monitoring, master data (CRUD + import Excel), reports, manual anulir.
+  - **Super Admin**: inherits admin + manages other admins, system configuration (branding, defaults), audit log, hard delete, impersonate view (read-only).
+  - **Content workflow**: Teacher creates draft → Admin deploys → Student takes exam → Teacher grades (essay) → Results published.
+- **Visibility control**: Score visibility per exam (show/hide from students). Result history visibility per exam. Configurable per exam by teacher/admin.
 - **Communication**: Schedule announcements? Grade notifications? Parent portal? Teacher-student messaging?
-- **Administration**: Class/section management? Teacher assignment? Academic calendar? Bulk operations?
+- **Administration**: Class/section management? Teacher assignment? Academic calendar? Bulk operations? Import Excel for master data (students, teachers, classes, subjects).
 
 ### Commerce / Marketplace / Booking
 - **Lifecycle**: Browse → select → pay → fulfill → review → return. Which parts does this app handle?

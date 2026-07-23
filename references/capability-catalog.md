@@ -1,6 +1,8 @@
 # Extensible Capability and Policy Catalog
 
-A capability is a policy trigger, not a domain label or tier. Add new capabilities when the project does not fit the catalog; custom nodes must specify their own `trigger`, `required_artifact_types`, `required_delivery_categories`, `gate_description`, `owner`, and `release_condition`. Connect custom capabilities to work items with `requires` edges so the validator can check their delivery.
+A capability is a policy trigger, not a domain label or tier. Add new capabilities when the project does not fit the catalog; custom nodes must set `policy_ids: ["custom"]` and specify their own `custom_policy` object (`trigger`, `required_artifact_types`, `required_delivery_categories`, `gate_description`, `owner`, and `release_condition`). 
+
+> **CRITICAL**: The `policy_ids` array must contain ONLY valid built-in policy IDs from the table below, or `["custom"]`. Do NOT invent arbitrary policy ID strings like `policy_ids: ["online_exam_policy"]`. Arbitrary policy strings cause `UNKNOWN_POLICY` and `POLICY_ARTIFACT_UNMODELED` P0/P1 validation errors. Connect all capabilities to work items/artifacts with `requires` edges so the validator can check their delivery.
 
 | Policy ID | Signal | Gate / minimum output | Feature expansion trigger |
 |---|---|---|---|
