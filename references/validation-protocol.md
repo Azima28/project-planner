@@ -20,6 +20,8 @@ All three reports must be read together with `issues`, `policy_coverage`, `event
 
 Eligibility is only `allowed` or `not_ready`. Production `allowed` requires a verified release gate and no P0, critical open nodes, stale/invalid artifacts, illegal waivers, or policy gaps.
 
+**Why P1 issues do not block pilot**: P1 issues are warnings (orphan nodes, missing event log entries, cosmetic gaps). They indicate areas that need attention but do not represent data integrity failures. Pilot mode allows limited real usage while accepting known cosmetic gaps. Only P0 issues (data integrity, security, broken references) block pilot. However, production requires ZERO P1 issues — every warning must be resolved before full production eligibility.
+
 If existing output is out of alignment, freeze as `draft_invalid`, inventory model and actual files, create a change request, update graph, regenerate all affected artifacts, then re-audit. Do not change design/Markdown alone to cover channel, role, policy, or service flow gaps.
 
 ## Planned-but-missing detection

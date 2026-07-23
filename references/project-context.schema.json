@@ -61,7 +61,7 @@
     },
     "evidence": {
       "type": "object",
-      "required": ["id", "kind", "ref", "scope", "retrieved_at", "confidence"],
+      "required": ["id", "kind", "ref", "scope", "retrieved_at", "confidence", "sensitivity"],
       "properties": {"id": {"$ref": "#/$defs/id"}, "kind": {"enum": ["user_statement", "user_document", "official_source", "primary_research", "independent_source", "tool_failure", "internal_record"]}, "ref": {"type": "string", "minLength": 1}, "scope": {"type": "string", "minLength": 1}, "retrieved_at": {"type": "string", "format": "date-time"}, "confidence": {"$ref": "#/$defs/confidence"}, "review_after": {"type": "string", "format": "date-time"}, "sensitivity": {"enum": ["public", "internal", "restricted"]}},
       "additionalProperties": true
     },

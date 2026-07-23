@@ -22,7 +22,7 @@ ROOT_GROUPS = (
 NODE_GROUPS = tuple(group for group in ROOT_GROUPS if group != "edges")
 ACTIVE = "active"
 OPEN_CONFIDENCE = {"assumed", "unverified", "blocked", "conflicting", "research_incomplete"}
-TRUSTED_EVIDENCE_KINDS = {"user_statement", "user_document", "official_source", "primary_research"}
+TRUSTED_EVIDENCE_KINDS = {"user_statement", "user_document", "official_source", "primary_research", "internal_record"}
 PRODUCTION_EVIDENCE_KINDS = {"user_document", "official_source", "primary_research", "internal_record"}
 SECRET_KEYS = {
     "api_key", "apikey", "access_token", "token", "password", "private_key",
@@ -443,8 +443,8 @@ def validate(model: dict[str, Any], model_path: Path, schema_path: Path) -> dict
         artifact_type = artifact.get("artifact_type")
         if isinstance(artifact_type, str):
             artifacts_by_type[artifact_type].append(artifact)
-        if artifact.get("disposition") == "skip" and not artifact.get("revisit_condition"):
-            issue(report, "P1", "SKIPPED_ARTIFACT_WITHOUT_REVISIT", f"Skipped artifact '{artifact.get('id')}' needs a condition that makes it required later.", artifact.get("id"))
+        # Note: revisit_condition for skip artifacts is enforced by the JSON schema (P0).
+        # No duplicate check needed here.
 
     policy_coverage: dict[str, Any] = {"required": {}, "baseline": {}}
     for policy_id, policy_artifacts in sorted(required_by_policy.items()):

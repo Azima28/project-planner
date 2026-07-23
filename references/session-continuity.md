@@ -36,6 +36,8 @@ The conversation log is **append-only**. Do not edit or delete old entries.
 
 **Timing**: Write conversation log entries after each interview batch (Phase 1-4 transition) or after every major decision — not just at the end of the session. If the session terminates unexpectedly, entries written so far are preserved. Do not wait until session end to batch-write all entries.
 
+**Format validation**: The validator does not check `conversation-log.jsonl` (it validates only `decisions.jsonl`, `research-ledger.jsonl`, and `change-requests.jsonl`). Every conversation log entry must still follow the format above — a resuming agent depends on correct format to reconstruct context. Malformed entries will not cause validation errors but will break session continuity.
+
 ## Resume checklist for a new agent
 
 When continuing an existing project, follow this order:
