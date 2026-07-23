@@ -1,0 +1,85 @@
+{
+  "$schema": "./project-context.schema.json",
+  "project": {
+    "id": "example-project",
+    "name": "Example Project",
+    "model_version": "2.1.0",
+    "revision": 1,
+    "archetype": "software_product",
+    "operating_mode": "prototype_mock",
+    "lifecycle": "draft",
+    "output_language": "id-ID",
+    "outcome": "Validate the problem safely before committing to real integrations."
+  },
+  "evidence": [
+    {"id": "E-001", "kind": "user_statement", "ref": "conversation:MSG-001", "scope": "prototype goal and partner-access status", "retrieved_at": "2026-07-20T00:00:00Z", "confidence": "confirmed", "sensitivity": "internal"}
+  ],
+  "instructions": [
+    {"id": "I-001", "text": "Validate the core problem before designing production integrations.", "criticality": "high", "lifecycle": "active", "confidence": "confirmed", "evidence_ids": ["E-001"], "acceptance_criteria": ["Every external dependency is labelled mock, sandbox, pilot, production, deferred, or not needed."]}
+  ],
+  "decisions": [
+    {"id": "D-001", "topic": "operating_mode", "value": "prototype_mock", "criticality": "high", "lifecycle": "active", "confidence": "confirmed", "evidence_ids": ["E-001"], "release_condition": "Written partner access and operational approval are required before production."}
+  ],
+  "research": [
+    {"id": "R-001", "claim": "No official partner API is available to this prototype.", "criticality": "high", "lifecycle": "active", "confidence": "unverified", "evidence_ids": ["E-001"], "next_action": "Use a mock adapter and request written confirmation from the prospective partner."}
+  ],
+  "capabilities": [
+    {"id": "CAP-001", "key": "limited_inventory", "criticality": "high", "lifecycle": "active", "confidence": "confirmed", "evidence_ids": ["E-001"], "policy_ids": ["limited_inventory"]},
+    {"id": "CAP-002", "key": "service_experience", "criticality": "medium", "lifecycle": "active", "confidence": "assumed", "evidence_ids": ["E-001"], "policy_ids": ["service_experience"]}
+  ],
+  "requirements": [
+    {"id": "REQ-001", "title": "Prevent a limited resource from being committed twice.", "requirement_type": "functional", "actor_or_owner": "product owner", "criticality": "high", "lifecycle": "active", "confidence": "confirmed", "evidence_ids": ["E-001"]}
+  ],
+  "work_items": [
+    {"id": "W-001", "title": "Temporary resource hold", "work_type": "feature", "delivery_profile": "user_facing", "criticality": "high", "lifecycle": "active", "confidence": "assumed", "evidence_ids": ["E-001"], "acceptance_criteria": ["A selected resource is unavailable to another simulated customer until its hold expires."], "not_applicable": {"metric": "Prototype does not yet have a production metric target."}}
+  ],
+  "delivery_nodes": [
+    {"id": "FLOW-001", "title": "Hold creation and expiry flow", "category": "flow", "lifecycle": "active", "confidence": "assumed"},
+    {"id": "SURFACE-001", "title": "Prototype web surface for simulated customer", "category": "surface", "surface_kind": "web", "roles": ["simulated_customer"], "context": "Browser prototype selected only to validate the resource-hold journey.", "lifecycle": "active", "confidence": "assumed"},
+    {"id": "SCREEN-001", "title": "Resource selection state", "category": "screen", "lifecycle": "active", "confidence": "assumed"},
+    {"id": "API-001", "title": "Mock hold API contract", "category": "api", "lifecycle": "active", "confidence": "assumed"},
+    {"id": "DATA-001", "title": "Hold state model", "category": "data", "lifecycle": "active", "confidence": "assumed"},
+    {"id": "TEST-001", "title": "Concurrent simulated hold test", "category": "test", "lifecycle": "active", "confidence": "assumed"}
+  ],
+  "integrations": [
+    {"id": "INT-001", "name": "External inventory provider", "capability_id": "CAP-001", "delivery_mode": "mock", "access_status": "unavailable", "fallback": "mock_adapter", "owner": "product_owner", "release_condition": "Official access and contract are confirmed before production.", "criticality": "high", "lifecycle": "active", "confidence": "confirmed", "evidence_ids": ["E-001"]}
+  ],
+  "risks": [
+    {"id": "RISK-001", "title": "Plan claims a real integration without partner access.", "severity": "P0", "owner": "product_owner", "next_action": "Keep generated artifacts labelled as mock until access is confirmed.", "criticality": "critical", "lifecycle": "active", "confidence": "confirmed", "evidence_ids": ["E-001"]}
+  ],
+  "change_requests": [],
+  "artifacts": [
+    {"id": "ART-001", "artifact_type": "project_brief", "disposition": "include", "rationale": "Baseline artifact for every project.", "source_ids": ["I-001", "D-001", "REQ-001", "W-001"], "trigger_ids": ["I-001"], "model_version": "2.1.0", "lifecycle": "draft", "confidence": "assumed"},
+    {"id": "ART-002", "artifact_type": "decision_register", "disposition": "include", "rationale": "Baseline decision receipt.", "source_ids": ["D-001"], "trigger_ids": ["D-001"], "model_version": "2.1.0", "lifecycle": "draft", "confidence": "assumed"},
+    {"id": "ART-003", "artifact_type": "risk_unknown_register", "disposition": "include", "rationale": "Baseline risk and unknown receipt.", "source_ids": ["RISK-001", "U-001"], "trigger_ids": ["RISK-001"], "model_version": "2.1.0", "lifecycle": "draft", "confidence": "assumed"},
+    {"id": "ART-004", "artifact_type": "planner_execution_report", "disposition": "include", "rationale": "Mandatory control report.", "source_ids": ["I-001"], "trigger_ids": ["I-001"], "model_version": "2.1.0", "lifecycle": "draft", "confidence": "assumed"},
+    {"id": "ART-005", "artifact_type": "synchronization_report", "disposition": "include", "rationale": "Mandatory control report.", "source_ids": ["I-001"], "trigger_ids": ["I-001"], "model_version": "2.1.0", "lifecycle": "draft", "confidence": "assumed"},
+    {"id": "ART-006", "artifact_type": "tree_coverage_report", "disposition": "include", "rationale": "Mandatory control report.", "source_ids": ["I-001"], "trigger_ids": ["I-001"], "model_version": "2.1.0", "lifecycle": "draft", "confidence": "assumed"},
+    {"id": "ART-007", "artifact_type": "state_model", "disposition": "include", "rationale": "Inventory policy requires an explicit state model.", "source_ids": ["CAP-001", "REQ-001"], "trigger_ids": ["CAP-001"], "model_version": "2.1.0", "lifecycle": "draft", "confidence": "assumed"},
+    {"id": "ART-008", "artifact_type": "concurrency_test", "disposition": "include", "rationale": "Inventory policy requires an adversarial concurrency test.", "source_ids": ["CAP-001", "TEST-001"], "trigger_ids": ["CAP-001"], "model_version": "2.1.0", "lifecycle": "draft", "confidence": "assumed"},
+    {"id": "ART-009", "artifact_type": "channel_decision", "disposition": "include", "rationale": "User-facing prototype needs an explicit surface decision.", "source_ids": ["CAP-002", "SURFACE-001"], "trigger_ids": ["CAP-002"], "model_version": "2.1.0", "lifecycle": "draft", "confidence": "assumed"},
+    {"id": "ART-010", "artifact_type": "service_blueprint", "disposition": "include", "rationale": "Service experience needs role, handoff, and recovery mapping.", "source_ids": ["CAP-002", "FLOW-001"], "trigger_ids": ["CAP-002"], "model_version": "2.1.0", "lifecycle": "draft", "confidence": "assumed"},
+    {"id": "ART-011", "artifact_type": "interaction_spec", "disposition": "include", "rationale": "Interaction states must be derived before visual design.", "source_ids": ["CAP-002", "W-001"], "trigger_ids": ["CAP-002"], "model_version": "2.1.0", "lifecycle": "draft", "confidence": "assumed"},
+    {"id": "ART-012", "artifact_type": "accessibility_spec", "disposition": "include", "rationale": "The chosen surface needs explicit accessibility verification.", "source_ids": ["CAP-002", "SURFACE-001"], "trigger_ids": ["CAP-002"], "model_version": "2.1.0", "lifecycle": "draft", "confidence": "assumed"},
+    {"id": "ART-013", "artifact_type": "usability_test_plan", "disposition": "include", "rationale": "User acceptance must be tested rather than assumed from a visual style.", "source_ids": ["CAP-002", "W-001"], "trigger_ids": ["CAP-002"], "model_version": "2.1.0", "lifecycle": "draft", "confidence": "assumed"}
+  ],
+  "edges": [
+    {"id": "EDGE-001", "from_id": "I-001", "to_id": "REQ-001", "relation": "informs", "lifecycle": "active", "confidence": "confirmed"},
+    {"id": "EDGE-002", "from_id": "D-001", "to_id": "W-001", "relation": "constrains", "lifecycle": "active", "confidence": "confirmed"},
+    {"id": "EDGE-003", "from_id": "REQ-001", "to_id": "W-001", "relation": "implemented_by", "lifecycle": "active", "confidence": "assumed"},
+    {"id": "EDGE-004", "from_id": "W-001", "to_id": "FLOW-001", "relation": "delivers", "lifecycle": "active", "confidence": "assumed"},
+    {"id": "EDGE-013", "from_id": "W-001", "to_id": "SURFACE-001", "relation": "delivers", "lifecycle": "active", "confidence": "assumed"},
+    {"id": "EDGE-005", "from_id": "W-001", "to_id": "SCREEN-001", "relation": "delivers", "lifecycle": "active", "confidence": "assumed"},
+    {"id": "EDGE-006", "from_id": "W-001", "to_id": "API-001", "relation": "delivers", "lifecycle": "active", "confidence": "assumed"},
+    {"id": "EDGE-007", "from_id": "W-001", "to_id": "DATA-001", "relation": "delivers", "lifecycle": "active", "confidence": "assumed"},
+    {"id": "EDGE-008", "from_id": "W-001", "to_id": "TEST-001", "relation": "verified_by", "lifecycle": "active", "confidence": "assumed"},
+    {"id": "EDGE-009", "from_id": "CAP-001", "to_id": "INT-001", "relation": "requires", "lifecycle": "active", "confidence": "confirmed"},
+    {"id": "EDGE-010", "from_id": "RISK-001", "to_id": "D-001", "relation": "mitigated_by", "lifecycle": "active", "confidence": "confirmed"},
+    {"id": "EDGE-011", "from_id": "RISK-001", "to_id": "TEST-001", "relation": "verified_by", "lifecycle": "active", "confidence": "assumed"},
+    {"id": "EDGE-012", "from_id": "W-001", "to_id": "ART-001", "relation": "documented_by", "lifecycle": "active", "confidence": "assumed"},
+    {"id": "EDGE-014", "from_id": "CAP-002", "to_id": "W-001", "relation": "requires", "lifecycle": "active", "confidence": "assumed"}
+  ],
+  "unknowns": [
+    {"id": "U-001", "question": "Will a real provider grant production API access?", "criticality": "high", "lifecycle": "active", "confidence": "blocked", "next_action": "Obtain a written answer from the prospective provider before production planning."}
+  ]
+}

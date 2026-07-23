@@ -1,0 +1,82 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://project-planner.local/schema/project-context-v2.1.json",
+  "title": "Project Planner Canonical Model v2.1",
+  "type": "object",
+  "required": ["project", "evidence", "instructions", "decisions", "research", "capabilities", "requirements", "work_items", "delivery_nodes", "integrations", "risks", "change_requests", "artifacts", "edges", "unknowns"],
+  "properties": {
+    "project": {"$ref": "#/$defs/project"},
+    "evidence": {"type": "array", "items": {"$ref": "#/$defs/evidence"}},
+    "instructions": {"type": "array", "items": {"$ref": "#/$defs/instruction"}},
+    "decisions": {"type": "array", "items": {"$ref": "#/$defs/decision"}},
+    "research": {"type": "array", "items": {"$ref": "#/$defs/research"}},
+    "capabilities": {"type": "array", "items": {"$ref": "#/$defs/capability"}},
+    "requirements": {"type": "array", "items": {"$ref": "#/$defs/requirement"}},
+    "work_items": {"type": "array", "items": {"$ref": "#/$defs/work_item"}},
+    "delivery_nodes": {"type": "array", "items": {"$ref": "#/$defs/delivery_node"}},
+    "integrations": {"type": "array", "items": {"$ref": "#/$defs/integration"}},
+    "risks": {"type": "array", "items": {"$ref": "#/$defs/risk"}},
+    "change_requests": {"type": "array", "items": {"$ref": "#/$defs/change_request"}},
+    "artifacts": {"type": "array", "items": {"$ref": "#/$defs/artifact"}},
+    "edges": {"type": "array", "items": {"$ref": "#/$defs/edge"}},
+    "unknowns": {"type": "array", "items": {"$ref": "#/$defs/unknown"}}
+  },
+  "allOf": [
+    {
+      "if": {"properties": {"project": {"properties": {"operating_mode": {"const": "production"}}, "required": ["operating_mode"]}}},
+      "then": {"properties": {"project": {"required": ["release_gate"], "properties": {"release_gate": {"type": "object", "required": ["approved_by", "approved_at", "evidence_ids", "operational_owner", "rollback_ref", "monitoring_ref"], "properties": {"approved_by": {"type": "string", "minLength": 1}, "approved_at": {"type": "string", "format": "date-time"}, "evidence_ids": {"type": "array", "minItems": 1, "items": {"$ref": "#/$defs/id"}}, "operational_owner": {"type": "string", "minLength": 1}, "rollback_ref": {"type": "string", "minLength": 1}, "monitoring_ref": {"type": "string", "minLength": 1}}}}}}}
+    },
+    {
+      "if": {"properties": {"project": {"properties": {"archetype": {"const": "custom"}}, "required": ["archetype"]}}},
+      "then": {"properties": {"project": {"required": ["custom_archetype"]}}}
+    }
+  ],
+  "$defs": {
+    "id": {"type": "string", "pattern": "^[A-Z][A-Z0-9]*-[A-Z0-9][A-Z0-9-]{0,62}$"},
+    "lifecycle": {"enum": ["draft", "active", "validated", "deferred", "out_of_scope", "superseded", "complete", "draft_invalid"]},
+    "confidence": {"enum": ["confirmed", "assumed", "unverified", "blocked", "conflicting", "research_incomplete"]},
+    "criticality": {"enum": ["low", "medium", "high", "critical"]},
+    "node": {
+      "type": "object",
+      "required": ["id", "lifecycle", "confidence"],
+      "properties": {"id": {"$ref": "#/$defs/id"}, "lifecycle": {"$ref": "#/$defs/lifecycle"}, "confidence": {"$ref": "#/$defs/confidence"}, "criticality": {"$ref": "#/$defs/criticality"}, "evidence_ids": {"type": "array", "items": {"$ref": "#/$defs/id"}}, "owner": {"type": "string"}, "next_action": {"type": "string"}, "target_release": {"type": "string"}},
+      "additionalProperties": true
+    },
+    "project": {
+      "type": "object",
+      "required": ["id", "name", "model_version", "archetype", "operating_mode", "lifecycle", "output_language"],
+      "properties": {
+        "id": {"type": "string", "pattern": "^[a-z0-9][a-z0-9-]{1,62}$"},
+        "name": {"type": "string", "minLength": 1},
+        "model_version": {"type": "string", "pattern": "^2\\.[0-9]+\\.[0-9]+$"},
+        "revision": {"type": "integer", "minimum": 1},
+        "archetype": {"enum": ["software_product", "backend_service", "data_ai", "research", "operations", "event", "physical", "hybrid", "custom"]},
+        "operating_mode": {"enum": ["prototype_mock", "sandbox", "pilot", "production"]},
+        "lifecycle": {"$ref": "#/$defs/lifecycle"},
+        "output_language": {"type": "string", "minLength": 2},
+        "custom_archetype": {"type": "string"},
+        "release_gate": {"type": "object"}
+      },
+      "additionalProperties": true
+    },
+    "evidence": {
+      "type": "object",
+      "required": ["id", "kind", "ref", "scope", "retrieved_at", "confidence"],
+      "properties": {"id": {"$ref": "#/$defs/id"}, "kind": {"enum": ["user_statement", "user_document", "official_source", "primary_research", "independent_source", "tool_failure", "internal_record"]}, "ref": {"type": "string", "minLength": 1}, "scope": {"type": "string", "minLength": 1}, "retrieved_at": {"type": "string", "format": "date-time"}, "confidence": {"$ref": "#/$defs/confidence"}, "review_after": {"type": "string", "format": "date-time"}, "sensitivity": {"enum": ["public", "internal", "restricted"]}},
+      "additionalProperties": true
+    },
+    "instruction": {"allOf": [{"$ref": "#/$defs/node"}, {"type": "object", "required": ["text", "acceptance_criteria"], "properties": {"text": {"type": "string", "minLength": 1}, "acceptance_criteria": {"type": "array", "minItems": 1, "items": {"type": "string"}}}}]},
+    "decision": {"allOf": [{"$ref": "#/$defs/node"}, {"type": "object", "required": ["topic", "value"], "properties": {"topic": {"type": "string", "minLength": 1}, "value": {}, "release_condition": {"type": "string"}}}]},
+    "research": {"allOf": [{"$ref": "#/$defs/node"}, {"type": "object", "required": ["claim", "evidence_ids", "next_action"], "properties": {"claim": {"type": "string", "minLength": 1}, "evidence_ids": {"type": "array", "minItems": 1, "items": {"$ref": "#/$defs/id"}}, "next_action": {"type": "string", "minLength": 1}, "contradiction_ids": {"type": "array", "items": {"$ref": "#/$defs/id"}}}}]},
+    "capability": {"allOf": [{"$ref": "#/$defs/node"}, {"type": "object", "required": ["key", "policy_ids"], "properties": {"key": {"type": "string", "minLength": 1}, "policy_ids": {"type": "array", "minItems": 1, "items": {"type": "string"}}, "custom_policy": {"type": "object", "required": ["trigger", "required_artifact_types", "required_delivery_categories", "gate_description", "owner", "release_condition"], "properties": {"trigger": {"type": "string", "minLength": 1}, "required_artifact_types": {"type": "array", "items": {"type": "string"}}, "required_delivery_categories": {"type": "array", "items": {"type": "string"}}, "gate_description": {"type": "string", "minLength": 1}, "owner": {"type": "string", "minLength": 1}, "release_condition": {"type": "string", "minLength": 1}}}}}]},
+    "requirement": {"allOf": [{"$ref": "#/$defs/node"}, {"type": "object", "required": ["title", "requirement_type"], "properties": {"title": {"type": "string", "minLength": 1}, "requirement_type": {"enum": ["functional", "quality", "constraint", "research", "operational", "physical"]}, "actor_or_owner": {"type": "string"}}}]},
+    "work_item": {"allOf": [{"$ref": "#/$defs/node"}, {"type": "object", "required": ["title", "work_type", "delivery_profile", "acceptance_criteria"], "properties": {"title": {"type": "string", "minLength": 1}, "work_type": {"enum": ["feature", "backend_change", "migration", "experiment", "operation", "content", "integration", "physical_task", "custom"]}, "delivery_profile": {"enum": ["user_facing", "mobile_app", "web_app", "pos", "service_experience", "backend", "data", "research", "operations", "physical", "mixed"]}, "acceptance_criteria": {"type": "array", "minItems": 1, "items": {"type": "string"}}, "not_applicable": {"type": "object"}}}]},
+    "delivery_node": {"allOf": [{"$ref": "#/$defs/node"}, {"type": "object", "required": ["title", "category"], "properties": {"title": {"type": "string", "minLength": 1}, "category": {"enum": ["flow", "screen", "surface", "api", "data", "security", "test", "metric", "runbook", "procedure", "experiment", "physical_output", "custom"]}, "surface_kind": {"enum": ["native_app", "web", "pwa", "desktop", "pos", "kiosk", "physical_card", "human_procedure", "api_only", "custom"]}, "roles": {"type": "array", "minItems": 1, "items": {"type": "string", "minLength": 1}}, "context": {"type": "string", "minLength": 1}}}, {"if": {"properties": {"category": {"const": "surface"}}, "required": ["category"]}, "then": {"required": ["surface_kind", "roles", "context"]}}]},
+    "integration": {"allOf": [{"$ref": "#/$defs/node"}, {"type": "object", "required": ["name", "capability_id", "delivery_mode", "access_status", "fallback", "owner", "release_condition"], "properties": {"name": {"type": "string", "minLength": 1}, "capability_id": {"$ref": "#/$defs/id"}, "delivery_mode": {"enum": ["mock", "sandbox", "pilot", "production", "deferred", "not_needed"]}, "access_status": {"enum": ["production_confirmed", "sandbox_only", "claimed_unverified", "unavailable", "unknown", "not_needed"]}, "fallback": {"type": "string", "minLength": 1}, "owner": {"type": "string", "minLength": 1}, "release_condition": {"type": "string", "minLength": 1}, "secret_ref": {"type": "string"}}}]},
+    "risk": {"allOf": [{"$ref": "#/$defs/node"}, {"type": "object", "required": ["title", "severity", "owner", "next_action"], "properties": {"title": {"type": "string", "minLength": 1}, "severity": {"enum": ["P0", "P1", "P2", "P3"]}, "owner": {"type": "string", "minLength": 1}, "next_action": {"type": "string", "minLength": 1}, "waiver": {"type": "object", "required": ["approved_by", "approved_at", "expires_at", "reason", "compensating_control", "evidence_ids"], "properties": {"approved_by": {"type": "string", "minLength": 1}, "approved_at": {"type": "string", "format": "date-time"}, "expires_at": {"type": "string", "format": "date-time"}, "reason": {"type": "string", "minLength": 1}, "compensating_control": {"type": "string", "minLength": 1}, "evidence_ids": {"type": "array", "minItems": 1, "items": {"$ref": "#/$defs/id"}}}}}}]},
+    "change_request": {"allOf": [{"$ref": "#/$defs/node"}, {"type": "object", "required": ["reason", "approval_required", "propagation_status"], "properties": {"reason": {"type": "string", "minLength": 1}, "approval_required": {"type": "boolean"}, "propagation_status": {"enum": ["pending", "in_progress", "regenerated", "validated", "rejected"]}}}]},
+    "artifact": {"allOf": [{"$ref": "#/$defs/node"}, {"type": "object", "required": ["artifact_type", "disposition", "rationale", "source_ids", "trigger_ids", "model_version"], "properties": {"artifact_type": {"type": "string", "minLength": 1}, "disposition": {"enum": ["include", "skip"]}, "rationale": {"type": "string", "minLength": 1}, "revisit_condition": {"type": "string", "minLength": 1}, "source_ids": {"type": "array", "minItems": 1, "items": {"$ref": "#/$defs/id"}}, "trigger_ids": {"type": "array", "minItems": 1, "items": {"$ref": "#/$defs/id"}}, "path": {"type": "string"}, "content_hash": {"type": "string", "pattern": "^[a-f0-9]{64}$"}, "model_version": {"type": "string", "minLength": 1}, "validation_run": {"type": "string", "pattern": "^VAL-[a-f0-9]{12}$"}}}, {"if": {"properties": {"disposition": {"const": "skip"}}, "required": ["disposition"]}, "then": {"required": ["revisit_condition"]}}]},
+    "edge": {"type": "object", "required": ["id", "from_id", "to_id", "relation", "lifecycle", "confidence"], "properties": {"id": {"$ref": "#/$defs/id"}, "from_id": {"$ref": "#/$defs/id"}, "to_id": {"$ref": "#/$defs/id"}, "relation": {"enum": ["informs", "decides", "constrains", "implemented_by", "delivers", "requires", "mitigated_by", "verified_by", "documented_by", "impacts", "supersedes", "evidences"]}, "lifecycle": {"$ref": "#/$defs/lifecycle"}, "confidence": {"$ref": "#/$defs/confidence"}}, "additionalProperties": true},
+    "unknown": {"allOf": [{"$ref": "#/$defs/node"}, {"type": "object", "required": ["question", "next_action"], "properties": {"question": {"type": "string", "minLength": 1}, "next_action": {"type": "string", "minLength": 1}}}]}
+  }
+}

@@ -1,0 +1,14 @@
+# Project outputs (generated per-session, not part of the skill)
+marketplace-kita/
+ya-exams/
+
+# Python cache
+__pycache__/
+*.pyc
+
+# System / IDE
+.agents/
+agents/
+.DS_Store
+Thumbs.db
+*.swp
