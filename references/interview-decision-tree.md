@@ -22,6 +22,7 @@ Before discussing screens and features, map the landscape:
 2. **Vision vs MVP**: What is the ultimate dream for this project? What is the Minimum Viable Product (v1) that makes it useful today?
 3. **Phasing**: What must be in v1? What can definitely wait for v2?
 4. **Success Criteria**: How will the user measure if this project is successful?
+5. **Design & Assets**: Explicitly ask who is providing the design. Does the user already have mockups/brand guidelines, or should the AI generate the design direction?
 
 Record each answer as evidence. Ambiguous = `assumed`, explicit = `confirmed`.
 
