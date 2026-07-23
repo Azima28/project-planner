@@ -35,6 +35,7 @@ Write the script as a temp file (`planning/_fix.py`), execute it from the planni
 | `RISK_TREE_GAP` | Risk missing `mitigated_by` OR `verified_by` edge (both required for P0/P1) | Add both types of outgoing edges |
 | `ORPHAN_NODE` | Active node has zero edges in or out | Connect it to the graph |
 | `DEFERRED_WITHOUT_TARGET` | Lifecycle=deferred without `target_release` field | Add `target_release: "vX.Y"` |
+| `DEFERRED_DISCOVERY_WITHOUT_ACTION` | Lifecycle=deferred_discovery without `next_action` | Add `next_action` describing what roles/dimensions remain unprobed |
 | `EVENT_LOG_MISSING_FIELD` | JSONL event missing required fields | Each event needs `id`, `timestamp`, `actor`, `action`, `model_version_before`, `model_version_after`, `affected_ids` |
 | `OUTPUT_WITHOUT_ARTIFACT_NODE` | File exists in `reports/` or `deliverables/` not claimed by any artifact | Known bootstrap issue (see below) |
 | `DUPLICATE_EDGE_CONTENT` | You added an edge that semantically duplicates an existing one (same from_id, to_id, relation) | Eliminate batch-fix `ne` calculation bug: use `max(re.findall(r'EDGE-(\\d+)', ...))` not `len(edges)+1`. Remove the duplicate. |

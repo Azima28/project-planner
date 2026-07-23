@@ -29,7 +29,7 @@ Produce traceable outputs from user instructions to evidence, decisions, work, a
 11. Event logs must stay synchronized with the model. Every decision, research, and change request node in the model must have a corresponding event in its respective JSONL file. This is not bureaucracy — event logs are the audit trail that enables reconciliation in the next session. If you create 5 decisions, there must be 5 events. A gap between the model and the log is a finding to report, not to hide.
 12. Report status honestly. Do not claim planning is "done", "100%", or "complete" if there are still `include` artifacts without files, `unverified` research affecting active decisions, or gates without receipts. Instead, say: "5 of 8 deliverables have files, 3 are still draft: X, Y, Z." The user deserves to know the actual state to make informed decisions. The word "complete" may only be used when the validation report supports it.
 13. Use professional language appropriate to audience and context. For business, technical, and financial decisions — avoid excessive decorative emoji and slang that undermines seriousness. Emoji may be used minimally for status indicators in tables (e.g., status columns). Adjust formality to the user: if the user is very casual, you may be slightly more relaxed — but critical decisions like "payment gateway choice" should never be delivered with excessive casualness. Important decisions deserve serious delivery.
-14. Read the relevant reference BEFORE taking action at each step. Do not create models, write artifacts, or decide architecture before reading the references mentioned in that step. This is non-negotiable — references contain rules that cannot be internalized from SKILL.md alone.
+14. Read the relevant reference BEFORE taking action at each step. Do not create models, write artifacts, or decide architecture before reading the references mentioned in that step. This is non-negotiable — references contain rules that cannot be internalized from SKILL.md alone. For long sessions, prioritize reading references relevant to the current step only. You do not need to re-read all 23 references in every session — use the reference routing table below to identify which files matter for each step.
 
 ## Project workspace
 
@@ -124,6 +124,8 @@ python scripts/validate_project_model.py planning/project-context.json --report-
 ```
 
 Read `references/validation-protocol.md` and choose at least one relevant scenario from `references/forward-test-matrix.md`. Fix the model first, not Markdown, until reports are consistent. `0 issues` only means the checks that actually ran passed; read policy, event-log, asset/link, and semantic-gap sections before claiming completeness.
+
+If the validator cannot be executed (Python unavailable, permission denied, dependency error), perform manual validation: check the model against `references/project-context.schema.json` and verify edge contracts from `references/validation-iteration-patterns.md`. Report the limitation to the user. The package cannot be marked higher than `prototype_mock` without automated validation.
 
 Always deliver three auditable reports without chain-of-thought: execution/compliance, synchronization, and tree coverage. State prototype, pilot, and production eligibility separately with `allowed` or `not_ready` only.
 

@@ -48,6 +48,14 @@ For each role identified in the scope, run a contextual exploration to discover 
 
 Record each included/deferred feature as a requirement node (`REQ-xxx`) with acceptance criteria.
 
+### Proactive fatigue checkpoint
+
+After completing deep dive for 3 or more roles, offer a checkpoint before continuing:
+
+> "We've explored [X] roles in detail ([list]). There are [Y] remaining roles ([list]). Would you like to continue exploring them now, or should I mark them as deferred and proceed with what we have?"
+
+Do not wait for the user to say "enough." Proactively offer the exit ramp.
+
 ### Handling user resistance to deep dive
 
 If the user says "enough, just build" during Phase 3:

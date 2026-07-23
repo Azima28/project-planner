@@ -34,6 +34,8 @@ Each line is a JSON object:
 
 The conversation log is **append-only**. Do not edit or delete old entries.
 
+**Timing**: Write conversation log entries after each interview batch (Phase 1-4 transition) or after every major decision — not just at the end of the session. If the session terminates unexpectedly, entries written so far are preserved. Do not wait until session end to batch-write all entries.
+
 ## Resume checklist for a new agent
 
 When continuing an existing project, follow this order:
