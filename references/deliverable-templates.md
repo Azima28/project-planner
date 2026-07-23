@@ -36,6 +36,23 @@ Do not place the SHA-256 file hash or validation run inside the file whose hash 
 |---|---|---|---|---|
 ```
 
+## Feature Map (Per Role)
+
+```markdown
+# Feature Map
+
+## [Role Name 1] (e.g. Buyer, Admin)
+- Description / Core Journey: [brief context]
+- Channel/Surface: [e.g. Mobile App, Web Panel]
+
+| ID | Feature / Requirement | Dimension | Priority (MoSCoW) | Status |
+|---|---|---|---|---|
+| REQ-xxx | [Feature name] | [Lifecycle/CRUD/etc] | [Must/Should/Could/Won't] | [Include/Deferred] |
+
+## [Role Name 2]
+...
+```
+
 ## Traceability View
 
 ```markdown
