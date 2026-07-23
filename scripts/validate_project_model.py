@@ -296,7 +296,23 @@ def validate(model: dict[str, Any], model_path: Path, schema_path: Path) -> dict
         except ValueError:
             issue(report, "P1", "INVALID_EVIDENCE_REVIEW_DATE", f"Evidence '{evidence_id}' has an invalid review_after value.", evidence_id)
     for node_id, node in nodes.items():
+        if node.get("superseded_by") and node.get("superseded_by") not in nodes:
+            issue(report, "P1", "BROKEN_SUPERSEDED_REFERENCE", f"Node '{node_id}' references missing superseded target '{node.get('superseded_by')}'.", node_id)
+            
+        if groups_by_id.get(node_id) == "integrations":
+            cap_id = node.get("capability_id")
+            if cap_id and cap_id not in nodes:
+                issue(report, "P1", "BROKEN_CAPABILITY_REFERENCE", f"Integration '{node_id}' references missing capability '{cap_id}'.", node_id)
+                
+        if groups_by_id.get(node_id) == "research":
+            for contradiction_id in values(node.get("contradiction_ids")):
+                if contradiction_id not in nodes:
+                    issue(report, "P1", "BROKEN_CONTRADICTION_REFERENCE", f"Research '{node_id}' references missing contradiction '{contradiction_id}'.", node_id)
+                    
         node_evidence_ids = values(node.get("evidence_ids"))
+        if groups_by_id.get(node_id) == "risks" and isinstance(node.get("waiver"), dict):
+            node_evidence_ids.extend(values(node.get("waiver").get("evidence_ids")))
+            
         for evidence_id in node_evidence_ids:
             if evidence_id not in evidence_ids:
                 issue(report, "P0", "BROKEN_EVIDENCE_REFERENCE", f"Node '{node_id}' references missing evidence '{evidence_id}'.", node_id)
