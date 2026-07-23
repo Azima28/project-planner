@@ -1,73 +1,60 @@
 # Adaptive Interview and Routing Tree
 
-Ask questions that change the next decision. Do not run a long questionnaire or require the user to understand technical jargon.
+The interview is a **dynamic, context-reactive conversation**, not a static questionnaire. Do not run through a fixed list of questions. Instead, follow this 4-phase expansion loop to understand the project deeply and generate proportional features.
 
-```text
-Input / existing artifacts
-  → restore or initialize snapshot v2
-  → outcome + archetype + mode
-  → capability/risk detection
-  → evidence and critical-gate loop
-  → proportional artifact candidates
-  → graph + validation
-  → next highest-risk gap, change request, or final report
-```
+## Phase 1: Understand & Reflect
 
-## Initial batch (always relevant)
+When the user gives their initial project description:
+1. **Listen and reflect**: Summarize what you understood (domain, core problem, beneficiaries, owners).
+2. **State assumptions**: "I'm assuming X and Y. Correct?"
+3. **Identify the domain**: Detect the domain signal (e.g., education, commerce, operations) and read `references/domain-knowledge.md` for probing amplifiers.
+4. **Ask about gaps contextually**: Do not ask generic questions. Ask specific follow-ups based on the domain and the user's description.
 
-1. What problem should change, for whom, and how is success measured?
-2. Is this for exploration, sandbox testing, limited operations, or real service?
-3. What is the closest work type: software, backend/data, research, operations/event, physical, or hybrid?
-4. What are the real constraints: deadline, budget, team/owner, language, location, device, connectivity, allowed channels, and accessibility?
-5. Is there money, personal data, partners, regulation, offline use, safety, legacy systems, or automated decision-making involved?
+*Example: If the user says "exam app", don't ask "What is the closest work type?" Instead ask "Are the exams for one school or multiple? Is it just multiple choice or essays too?"*
 
-Answers trigger capabilities and follow-up questions. If the user doesn't know, store as unknown and offer a safe mode/fallback. If the user says "just proceed," only proceed in reversible areas.
+## Phase 2: Stakeholder & Scope Mapping
 
-## Channel routing and service design
+Before discussing screens and features, map the landscape:
+1. **Stakeholder Map**: Who pays for it? Who maintains it? Who is affected by it? Who could block it? (Don't just limit to app roles).
+2. **Vision vs MVP**: What is the ultimate dream for this project? What is the Minimum Viable Product (v1) that makes it useful today?
+3. **Phasing**: What must be in v1? What can definitely wait for v2?
+4. **Success Criteria**: How will the user measure if this project is successful?
 
-If there are direct users, multiple roles, physical processes, or design requests, ask:
+## Phase 3: Role-by-Role Deep Dive
 
-1. What task must each role perform, under what conditions, and how quickly/frequently?
-2. Does the role use a personal phone, browser, shared device, POS/kiosk, card/QR, or staff assistance?
-3. Must one channel serve all roles? If not, which channel is safest and simplest per role?
-4. What happens when device, network, identity, or stock/authorization fails; who handles recovery?
-5. What proof does the user and operator receive: digital receipt, printed slip, audit log, or procedure?
+For each role identified in the scope, run a contextual exploration to discover features. Do this sequentially, not all at once.
 
-Do not ask about colors, fonts, or mockups before these answers lock in the required tasks, surfaces, and states. If the user requests design "liked by many users," convert it into a hypothesis tested with a prototype and user sessions, not a planner claim.
+1. **Core Journey**: Walk through the role's typical session from start to finish. "What happens before, during, and after they use the system?"
+2. **7-Dimension Probing**: Generate specific features using these universal dimensions (use domain amplifiers from `references/domain-knowledge.md` to deepen them):
+   - **Lifecycle phases**: What happens before, during, and after the core task?
+   - **CRUD per entity**: Who creates, reads, updates, deletes each data entity?
+   - **Analytics & reporting**: What data does this role need to see or export?
+   - **Communication & notification**: How does this role communicate with others?
+   - **Configuration & settings**: What can this role customize?
+   - **Edge cases & recovery**: What goes wrong and who fixes it?
+   - **Competitor features**: What do similar apps offer? (Research 2-3 reference apps).
+3. **Surface/Channel Decision**: After understanding the tasks, choose the right surface (native app, web, POS, kiosk, physical procedure). Do not assume everything is a screen.
+4. **Between-Role Handoffs**: Where does one role's output become another's input?
 
-## Batching and stop condition
+*Present the discovered features per role grouped clearly, with options to Include, Defer, or Skip.*
 
-- Group questions that decide one thing; high-risk gates get separate receipts.
-- Initial batch is limited to **approximately 5 top-level questions** per response. This is not an absolute number — 3 complex questions can be heavier than 6 yes/no questions. The principle: do not overwhelm the user.
-- If the user answers ambiguously or partially, **do not fill missing answers with assumptions**. Ask specific follow-ups.
-- After each batch, paraphrase facts, assumptions, impact, and blockers for user correction.
-- Do not proceed to pilot/production if critical gates are unresolved. Prototype may proceed if simulation boundaries are clear.
-- Re-run routing when mode, archetype, capability, budget, owner, data, partner, or scope changes.
+## Phase 4: Synthesis & Scope Lock
 
-### Good batch example
+Before proceeding to modeling and creating artifacts:
+1. **Present a Complete Feature Map**: Organize all discovered features by role with priority tags (Must/Should/Could/Won't - MoSCoW).
+2. **Proactively Suggest**: Offer features the user didn't mention but are common in this domain based on your probing.
+3. **Scope Lock**: Ask the user to confirm: "Is this scope complete for v1?"
+4. **Record**: Create `REQ-xxx` nodes for all included and deferred features. Deferred features must have a `target_release` condition.
 
-> 1. Who is the primary target user? (buyers only, or buyers + sellers?)
-> 2. Working alone or with a team? If a team, how many people?
-> 3. Do you already have brand identity (logo, colors, name)?
-> 4. Business model: commission, subscription, or something else?
-> 5. When is the target for the first release?
+## Batching and Stop Condition
 
-This is good: each question decides one thing, the user can answer quickly, and there are no hidden sub-questions.
+- Group questions logically. Do not overwhelm the user with 10+ questions at once.
+- The initial batch is limited to approximately 5 top-level conceptual questions.
+- If the user answers ambiguously, ask specific follow-ups. Do not assume.
+- The interview loop stops when Phase 4 is confirmed by the user.
 
-### Bad batch example
+## Proportional Scaling
 
-> Some questions to determine the project direction:
->
-> 1. Target users? Platform? Budget? Timeline? Team size? Skills?
-> 2. Features: search? filter? payment? chat? reviews? wishlist? notifications?
-> 3. Preferences: SQL/NoSQL? REST/GraphQL? Monolith/micro? CI/CD? Testing?
-
-This is bad: 13+ sub-questions dumped at once. The user will answer partially, and the agent will fill the rest with assumptions.
-
-### Handling ambiguous answers
-
-**User**: "team" (without a number)
-
-**DO NOT**: Assume "solo dev" and mark as `confirmed`.
-
-**DO**: "How many people on the team? This affects architecture — 1-2 people take a different approach than 5+."
+- **Small projects** (landing page, single script): Skip Phase 3 deep dive. Use the fast path from `references/scale-detection-guide.md`.
+- **Medium projects**: Run Phase 3 dimensions 1-4.
+- **Large/Complex projects**: Run the full 4-phase loop including competitor research.

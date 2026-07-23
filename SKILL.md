@@ -61,13 +61,34 @@ For medium-to-large projects, follow the full workflow below.
 - Create an Instruction Registry with acceptance criteria.
 - Choose the initial archetype and the lowest safe mode. If unclear, store as `assumed` or `blocked`, not production.
 
-### 2. Discover and route
+### 2. Discover: Understand, reflect, and branch
 
-Read `references/interview-decision-tree.md`, then ask questions in small batches that drive decisions. Collect outcome, owner, audience, constraints, archetype, mode, device/connectivity, and relevant capabilities/risks. Read `references/scale-detection-guide.md` to determine proportional planning depth.
+Read `references/interview-decision-tree.md`. The interview is a dynamic conversation, not a questionnaire. The planner:
 
-For user-facing, multi-role, physical, or design work, read `references/delivery-surface-design.md`. Map stable tasks across channels first; then choose surface per role (e.g., native app, web, POS, kiosk, card/procedure, or hybrid). Record what was chosen, considered, or deferred; do not force `screen` or application if the work can be completed with a different surface.
+a) **Listens and reflects**: Summarize what the user said, state assumptions, and identify gaps. Ask only about what's missing — don't re-ask what was already said.
+b) **Identifies domain and branches**: Detect the domain signal from the user's description. Read `references/domain-knowledge.md` for probing amplifiers. Generate contextual follow-up questions specific to this domain and project — not generic questions from a list.
+c) **Maps stakeholders and scope**: Identify all affected parties (not just app roles). Discuss MVP vs full vision. Establish phasing and priority (MoSCoW). Record success criteria.
 
-Break requirements into capabilities. Read `references/capability-catalog.md`; for new capabilities, create a custom policy contract — do not force-fit into an existing domain.
+Read `references/scale-detection-guide.md` to determine proportional depth.
+
+### 2b. Deep dive: Role-by-role feature expansion
+
+For each role identified, run a contextual exploration:
+a) Walk through the role's journey/session from start to finish.
+b) Probe 7 dimensions: lifecycle, CRUD per entity, analytics/reporting, communication, configuration, edge cases, competitor features.
+c) Use domain amplifiers to generate deeper questions for the detected domain.
+d) Decide channel/surface per role AFTER understanding what they do.
+e) Map handoffs between roles (one role's output → another role's input).
+
+For user-facing work, read `references/delivery-surface-design.md` for channel decisions. Break requirements into capabilities per `references/capability-catalog.md`.
+
+### 2c. Synthesis and scope lock
+
+Before modeling:
+a) Present a complete feature map organized by role with MoSCoW priority.
+b) Proactively suggest features the user didn't mention but are common in the detected domain.
+c) Ask the user to confirm scope: "Is this complete for v1?"
+d) Create `REQ-xxx` nodes for all features (include, deferred, out_of_scope). Deferred features get `target_release` conditions.
 
 ### 3. Research and critical gates
 
@@ -129,9 +150,10 @@ If the user changes direction or output is out of alignment with the plan, freez
 
 | Need | Read |
 |---|---|
-| Adaptive questions | `references/interview-decision-tree.md` |
+| Understand, reflect, branch | `references/interview-decision-tree.md` |
+| Domain-specific depth | `references/domain-knowledge.md` |
+| Role-by-role feature expansion | `references/interview-decision-tree.md` |
 | Proportional depth | `references/scale-detection-guide.md` |
-| Industry domain probes | `references/domain-knowledge.md` |
 | Channel, UX, service design | `references/delivery-surface-design.md` |
 | Capability and custom policy | `references/capability-catalog.md` |
 

@@ -1,6 +1,6 @@
 # Domain Probe Library
 
-This is a list of trigger questions, not provider facts, pricing, design, or technology recommendations. Research up-to-date sources every time an answer affects a decision.
+This is a list of trigger questions and probing amplifiers. Do not use this as a static provider facts, pricing, design, or technology recommendation list. Research up-to-date sources every time an answer affects a decision.
 
 | Domain signal | Probe | Potentially active capability |
 |---|---|---|
@@ -13,4 +13,45 @@ This is a list of trigger questions, not provider facts, pricing, design, or tec
 | Internal ops/event | Who runs the procedure when it fails or in the field? | `operations`, `physical_safety` |
 | Legacy migration | What must not be lost, how to rollback, and when is cutover? | `migration` |
 
-Add rows/custom capabilities when a new domain does not fit. Do not infer partner access, legal obligations, pricing, or API compatibility from this list.
+## Domain-Specific Probing Amplifiers
+
+When a domain signal is detected from the user's initial description, use these amplifiers to generate deeper, domain-relevant questions during Phase 3 (Role Deep Dive) of the interview process. **These are probing directions, not feature lists.** Generate specific questions from context.
+
+### Education / Exam / LMS
+- **Lifecycle**: Academic year → semester → exam period → grading → report card → next year. Where does this app fit in that cycle?
+- **Content**: How are questions created? Bank shared across teachers? Versioned across years? Difficulty tagging? Topic categorization?
+- **Assessment types**: Only multiple choice? Essay? Oral? Project-based? Mixed? Each type has different grading, timing, and review needs.
+- **Grading**: Auto-grade vs manual. Rubric system? Grade curves? Weighted sections? Minimum passing score?
+- **Analytics**: Per-student trends? Per-topic weakness? Class comparison? School-wide statistics? Parent-visible reports?
+- **Integrity**: Proctoring? Lockdown? Randomization? Time limits? IP/device restrictions? Plagiarism detection?
+- **Communication**: Schedule announcements? Grade notifications? Parent portal? Teacher-student messaging?
+- **Administration**: Class/section management? Teacher assignment? Academic calendar? Bulk operations?
+
+### Commerce / Marketplace / Booking
+- **Lifecycle**: Browse → select → pay → fulfill → review → return. Which parts does this app handle?
+- **Catalog**: How many products/services? Categories? Search/filter? Recommendations?
+- **Inventory**: Limited stock? Reservations? Multiple locations? Real-time availability?
+- **Payment**: Who holds money? Escrow? Split payment? Subscription? Refund flow?
+- **Fulfillment**: Digital delivery? Physical shipping? Booking/appointment? Self-service?
+- **Loyalty**: Points? Tiers? Referral? Coupons/discounts?
+- **Communication**: Order updates? Promotional notifications? Chat between buyer/seller?
+- **Administration**: Seller dashboard? Revenue reports? Dispute resolution? Commission tracking?
+
+### Healthcare / Clinic / Wellness
+- **Lifecycle**: Appointment → check-in → consultation → prescription → follow-up.
+- **Data**: Patient history? Medication interactions? Lab results? Insurance claims?
+- **Analytics**: Visit frequency? Treatment outcomes? Revenue per service?
+- **Compliance**: HIPAA/local equivalents? Consent management? Audit trails?
+
+### Logistics / Delivery / Fleet
+- **Lifecycle**: Order → assign → pick up → transit → deliver → confirm.
+- **Fleet**: Vehicle management? Route optimization? Warehouse zones?
+- **Analytics**: Delivery time? Driver performance? Cost per delivery?
+
+### Internal Ops / Enterprise Tools
+- **Lifecycle**: Request → approve → execute → verify → close.
+- **Tracking**: Asset tracking? Procedure templates? Shift/schedule?
+- **Analytics**: SLA compliance? Bottleneck analysis? Cost tracking?
+
+### Unknown / Niche Domain
+When no domain signal matches, rely entirely on the universal 7-dimension framework from `references/interview-decision-tree.md`. Generate domain questions by reasoning about the entities, roles, and workflows described by the user, rather than looking up a table.

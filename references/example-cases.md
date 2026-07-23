@@ -150,3 +150,57 @@ Different project, different depth. An admin dashboard does not need brand chara
 - Create a 2000-line model for a landing page
 - Force running the validator and 3 reports
 - Ask 15 questions before producing anything
+
+## Case 7: Dynamic interview — exam app (full flow)
+
+**User**: "I want a strict mobile exam app for schools."
+
+**Phase 1 — Understand & Reflect:**
+
+> "I understand you want a mobile exam application for school environments with strict anti-cheating measures. Let me confirm:
+> - Domain: Education / Examination
+> - Primary concern: exam integrity (anti-cheat)
+> - Environment: school (institutional, not consumer)
+>
+> Not yet clear:
+> 1. How many roles use this app? Just students, or also teachers/admin?
+> 2. What types of exams? (daily quiz, midterm, final, national exam?)
+> 3. Is this for one school or multiple schools?
+> 4. Do you have an existing system this replaces, or starting fresh?"
+
+**Phase 2 — Stakeholder & Scope (after user answers):**
+
+> "Identified stakeholders: students (take exams), teachers (create and grade), admin (schedule and monitor), you (build and operate).
+>
+> Let's define scope:
+> 1. For v1 (MVP), what's the MINIMUM that makes this useful? Just students taking exams + teachers grading? Or do you need admin features from day one?
+> 2. What's the full vision you want eventually? Multi-school? Face recognition? AI proctoring? Analytics?
+> 3. What can definitely wait for v2?"
+
+**Phase 3 — Role Deep Dive (Student):**
+
+> "Let me explore what the Student role needs:
+>
+> **Journey**: Student logs in → sees scheduled exams → enters exam room (lockdown) → answers questions → submits → sees result.
+>
+> **Lifecycle probes**: What happens BEFORE an exam? Does the student need a practice mode? Can they review past exams? After getting results, can they see which answers were wrong?
+>
+> **Analytics probes**: Does the student see their grade history? Trend over time? Weak topics?
+>
+> **Communication probes**: How does the student learn about schedule changes? Push notification? Announcement feed?
+>
+> **Competitor features**: Quizizz has gamified practice. Exam.net has teacher-controlled monitoring. Google Forms has instant feedback. Which of these interest you?"
+
+*(Repeat Phase 3 for Teacher, Admin, Super Admin)*
+
+**Phase 4 — Synthesis:**
+
+> "Complete feature map for v1:
+>
+> **Student (12 features)**: Login, exam list, practice mode, lockdown exam room, question navigation, timer, doubt marking, auto-submit, result view, wrong answer review, grade history, notification feed
+>
+> **Teacher (15 features)**: Question bank CRUD, difficulty tagging, topic categorization, exam builder, timer config, randomization config, auto-grading PG, manual grading essay with rubric, bulk grading, per-student analytics, class analytics, grade export PDF, Excel import questions, announcement post, exam monitoring
+>
+> **Admin (10 features)**: User management, class/section CRUD, teacher assignment, exam scheduling, deploy exam, live monitor, audit log, school statistics, data export, system config
+>
+> Is this complete for v1? Should anything move to v2?"
