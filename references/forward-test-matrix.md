@@ -5,6 +5,8 @@ Choose scenarios that represent the actual archetype and capabilities; do not on
 | Scenario | Provable passing |
 |---|---|
 | Small landing page without sensitive data | Concise model; does not force database, API, or 14 documents |
+| Multi-role application with 3+ roles | Phase 3 probes each role separately; feature count matches depth; MoSCoW priorities mapped |
+| User refuses deep dive mid-interview | `deferred_discovery` lifecycle recorded; unprobed roles noted as risks; no assumptions filled |
 | Backend/migration | Does not force UI flow; has data/rollback/test edges |
 | Research programme | Research work items have question, evidence, method, decision exit |
 | Partner has no API access | Receipt chooses mock/defer/investigate; no production claims |

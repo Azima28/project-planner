@@ -98,7 +98,7 @@ Read `references/critical-decision-gates.md` if a capability triggers a gate. Di
 
 ### 4. Model and graph first
 
-Start from `references/project-context.template.json` and follow `references/project-model.md`.
+Start from `references/project-context.template.json` and follow `references/project-model.md`. Incorporate `REQ-xxx` nodes generated in Phase 2c into the model — do not re-create requirements from scratch.
 
 - Create nodes for evidence, instruction, decision, research, capability, requirement, work item, delivery, integration, risk, change request, artifact, and unknown. Use delivery node `surface` when per-role channel is an important decision.
 - Use relevant work profiles; backend/migration is not forced to have UI flows, and physical/procedural services are not forced to have screens. All still require appropriate failure/recovery, test, and control.
@@ -146,7 +146,7 @@ If the user changes direction or output is out of alignment with the plan, freez
 
 ## Reference routing
 
-### Discovery & interview (step 1-2)
+### Discovery & interview (step 1-2c)
 
 | Need | Read |
 |---|---|
@@ -202,6 +202,8 @@ If the user changes direction or output is out of alignment with the plan, freez
 ## Final check
 
 - [ ] Archetype, mode, language, owner, outcome, and active constraints are clear or recorded as gaps.
+- [ ] Feature expansion (Phase 3) ran for each role, or user explicitly requested to skip (`deferred_discovery` recorded).
+- [ ] Scope lock (Phase 4) confirmed by user before modeling, with MoSCoW priorities mapped to `REQ-xxx` nodes.
 - [ ] All confirmed claims, production access, waivers, and release gates have valid evidence.
 - [ ] Capabilities trigger appropriate policy/gate/artifact/test; custom capabilities have their own contract.
 - [ ] Delivery channel per role is chosen or explicitly deferred; design does not assume application and all claimed assets/links actually exist.

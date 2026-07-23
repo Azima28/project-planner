@@ -101,5 +101,5 @@ This is bad: 13+ sub-questions dumped at once. The user will answer partially, a
 ## Proportional Scaling
 
 - **Small projects** (landing page, single script): Skip Phase 3 deep dive. Use the fast path from `references/scale-detection-guide.md`.
-- **Medium projects**: Run Phase 3 dimensions 1-4.
+- **Medium projects**: Run Phase 3 dimensions 1-4 (lifecycle, CRUD, analytics, communication).
 - **Large/Complex projects**: Run the full 4-phase loop including competitor research.

@@ -7,12 +7,12 @@ The examples below show how the skill rules work in real situations. These are n
 **User**: "I want to build a marketplace for buying and selling goods, Android first."
 
 **What to do:**
-1. Do not immediately determine stack/architecture. Start from outcome: what does the user want to achieve?
-2. Read `interview-decision-tree.md`, ask a small batch (~5): who is the audience, solo or team, do you have design/brand?, what is the business model?, when is the target launch?
-3. Record each answer as evidence. Ambiguous answers = `assumed`, not `confirmed`.
-4. Read `capability-catalog.md` — a marketplace triggers: `limited_inventory`, `money_movement`, `identity_access`.
-5. Read `critical-decision-gates.md` — `money_movement` triggers a gate. Display receipt: "Payment will be mock/sandbox first because of pilot mode."
-6. Only after this, model and graph.
+1. Do not immediately determine stack/architecture. Start from Phase 1: Understand & Reflect.
+2. Listen and reflect the domain (Commerce), then ask specific gaps (e.g., "Are you handling payments on-platform or just matching buyers/sellers?").
+3. Proceed to Phase 2 (Scope/MVP) and Phase 3 (Role Deep Dive). Probe the Buyer and Seller roles using the 7 dimensions.
+4. Record each answer as evidence. Ambiguous answers = `assumed`, not `confirmed`.
+5. Read `capability-catalog.md` — a marketplace triggers: `limited_inventory`, `money_movement`, `identity_access`. Display critical gate receipts.
+6. Only after Phase 4 (Scope Lock), start the modeling and graph.
 
 **What NOT to do:**
 - Immediately say "OK, we'll use Flutter + Firebase + Midtrans" without an interview.
